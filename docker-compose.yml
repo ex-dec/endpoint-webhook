@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    container_name: golang-app
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+
+  promtail:
+    image: grafana/promtail:2.9.4
+    container_name: promtail
+    volumes:
+      - ./logs:/app/logs
+      - ./promtail-config.yml:/etc/promtail/promtail.yaml
+    env_file:
+      - .env
+    command: -config.file=/etc/promtail/promtail.yaml

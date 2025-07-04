@@ -90,7 +90,7 @@ func main() {
 	}
 	log.SetOutput(logFile)
 
-	http.HandleFunc("/check", authMiddleware(handler))
+	http.HandleFunc("/", authMiddleware(handler))
 	fmt.Println("Server running at http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
 }
